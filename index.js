@@ -4,17 +4,16 @@ const { transactionRouter } = require("./Router/Transaction.Router");
 const { statisticRouter } = require("./Router/Statistics.Router");
 const { barChartRouter } = require("./Router/BarChart.Router");
 const { pieChartRouter } = require("./Router/PieChart.Router");
-
+const fs = require("fs");
 const app = express();
 
 app.use(express.json());
-
-const fs = require("fs");
 
 app.get("/", (req, res) => {
   fs.readFile("documentation.txt", "utf-8", (err, data) => {
     if (err) {
       console.log(err);
+      res.status(500).send('Error reading file');
     } else {
       res.send(data);
     }
