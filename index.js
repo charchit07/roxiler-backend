@@ -4,24 +4,19 @@ const { transactionRouter } = require("./Router/Transaction.Router");
 const { statisticRouter } = require("./Router/Statistics.Router");
 const { barChartRouter } = require("./Router/BarChart.Router");
 const { pieChartRouter } = require("./Router/PieChart.Router");
-const fs = require("fs");
+
+
 const app = express();
 
 app.use(express.json());
 
+
 app.get("/", (req, res) => {
-  fs.readFile("documentation.txt", "utf-8", (err, data) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send('Error reading file');
-    } else {
-      res.send(data);
-    }
-  });
+  res.send("Home Page");
 });
 
-app.use("/", transactionRouter);
-app.use("/", statisticRouter);
+app.use("/",transactionRouter );
+app.use("/",statisticRouter );
 app.use("/", barChartRouter);
 app.use("/", pieChartRouter);
 
